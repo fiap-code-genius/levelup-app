@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, FlatList, TouchableOpacity, Keyboard } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useAuth } from '../../context/AuthContext';
 import { useThemeColors } from '../../context/ThemeContext';
@@ -17,13 +17,20 @@ export default function AdminTasksScreen() {
   const [points, setPoints] = useState('');
   const [assignedUserId, setAssignedUserId] = useState<string | undefined>(undefined);
 
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
+
+  const normalUsers = users.filter(u => u.role === 'USER');
+
   const handleCreate = async () => {
     if (!title || !points || !assignedUserId) {
+      setShowErrorPopup(true);
       return;
     }
 
     const pointsNumber = Number(points);
     if (isNaN(pointsNumber) || pointsNumber <= 0) {
+      setShowErrorPopup(true);
       return;
     }
 
@@ -38,6 +45,9 @@ export default function AdminTasksScreen() {
     setDescription('');
     setPoints('');
     setAssignedUserId(undefined);
+
+    Keyboard.dismiss();
+    setShowSuccessPopup(true);
   };
 
   const renderItem = ({ item }: { item: Task }) => {
@@ -70,7 +80,9 @@ export default function AdminTasksScreen() {
       <Text style={[styles.title, { color: colors.text }]}>Tarefas</Text>
 
       <View style={[styles.card, { backgroundColor: colors.card }]}>
-        <Text style={[styles.sectionTitle, { color: colors.text }]}>Cadastrar tarefa</Text>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>
+          Cadastrar tarefa
+        </Text>
 
         <TextInput
           style={[styles.input, { borderColor: colors.border, color: colors.text }]}
@@ -104,15 +116,15 @@ export default function AdminTasksScreen() {
               setAssignedUserId(value === '' ? undefined : value)
             }
             dropdownIconColor={colors.text}
-            style={{ color: colors.text }}  
+            style={{ color: colors.text }}
           >
             <AnyPicker.Item label="Selecione um usuário" value="" color={colors.text} />
-            {users.map(user => (
+            {normalUsers.map(user => (
               <AnyPicker.Item
                 key={user.id}
                 label={user.fullName}
                 value={user.id}
-                color={colors.text}  
+                color={colors.text}
               />
             ))}
           </AnyPicker>
@@ -132,6 +144,93 @@ export default function AdminTasksScreen() {
         renderItem={renderItem}
         contentContainerStyle={{ paddingBottom: 24 }}
       />
+
+      {showSuccessPopup && (
+        <View
+          style={{
+            position: 'absolute',
+            top: 0, left: 0, right: 0, bottom: 0,
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 9999
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: colors.card,
+              padding: 24,
+              borderRadius: 12,
+              width: '80%',
+              alignItems: 'center'
+            }}
+          >
+            <Text style={{ color: colors.text, fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>
+              Tarefa cadastrada!
+            </Text>
+
+            <Text style={{ color: colors.textSecondary, fontSize: 15, textAlign: 'center', marginBottom: 20 }}>
+              A nova tarefa foi registrada com sucesso.
+            </Text>
+
+            <TouchableOpacity
+              onPress={() => setShowSuccessPopup(false)}
+              style={{
+                backgroundColor: colors.primary,
+                paddingVertical: 10,
+                paddingHorizontal: 20,
+                borderRadius: 8
+              }}
+            >
+              <Text style={{ color: '#fff', fontWeight: 'bold' }}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+
+      {showErrorPopup && (
+        <View
+          style={{
+            position: 'absolute',
+            top: 0, left: 0, right: 0, bottom: 0,
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 9999
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: colors.card,
+              padding: 24,
+              borderRadius: 12,
+              width: '80%',
+              alignItems: 'center'
+            }}
+          >
+            <Text style={{ color: colors.danger, fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>
+              Campos obrigatórios
+            </Text>
+
+            <Text style={{ color: colors.textSecondary, fontSize: 15, textAlign: 'center', marginBottom: 20 }}>
+              Preencha título, pontos e selecione um usuário.
+            </Text>
+
+            <TouchableOpacity
+              onPress={() => setShowErrorPopup(false)}
+              style={{
+                backgroundColor: colors.danger,
+                paddingVertical: 10,
+                paddingHorizontal: 20,
+                borderRadius: 8
+              }}
+            >
+              <Text style={{ color: '#fff', fontWeight: 'bold' }}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+
     </View>
   );
 }

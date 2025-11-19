@@ -128,7 +128,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     await saveTasks(newTasks);
     await saveUsers(newUsers);
 
-    Alert.alert('Tarefa concluída!', `Você ganhou ${gained} pontos.`);
   };
 
   const redeemReward = async (rewardId: string) => {
@@ -155,7 +154,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setCurrentUser(updatedUser);
     await saveUsers(newUsers);
 
-    Alert.alert('Prêmio resgatado!', reward.title);
   };
 
   const createUser = async (data: { fullName: string; email: string; role?: 'ADMIN' | 'USER' }) => {
