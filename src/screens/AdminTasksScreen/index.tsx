@@ -104,10 +104,16 @@ export default function AdminTasksScreen() {
               setAssignedUserId(value === '' ? undefined : value)
             }
             dropdownIconColor={colors.text}
+            style={{ color: colors.text }}  
           >
-            <AnyPicker.Item label="Selecione um usuário" value="" />
+            <AnyPicker.Item label="Selecione um usuário" value="" color={colors.text} />
             {users.map(user => (
-              <AnyPicker.Item key={user.id} label={user.fullName} value={user.id} />
+              <AnyPicker.Item
+                key={user.id}
+                label={user.fullName}
+                value={user.id}
+                color={colors.text}  
+              />
             ))}
           </AnyPicker>
         </View>
