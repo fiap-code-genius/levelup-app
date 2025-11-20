@@ -80,7 +80,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = async (email: string, password: string) => {
     const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
     if (!user || password !== 'admin123') {
-      Alert.alert('Erro', 'Credenciais inválidas');
       return false;
     }
     setCurrentUser(user);

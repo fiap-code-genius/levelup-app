@@ -14,8 +14,8 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
   },
   image: {
-    width: '90%',
-    height: 400,    
+    width: '100%',
+    height: 320,    
     borderRadius: 12,
   },
   caption: {
