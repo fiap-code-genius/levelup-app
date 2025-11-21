@@ -12,6 +12,10 @@ O LevelUp transforma rotinas internas em um sistema de **tarefas, pontos, nívei
 ## Expo Preview
 <img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/666801c1-41ec-47ed-aef8-56c7010be2a0" />
 
+## APK
+<img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/fbff9c2e-029d-46d8-9aeb-8a8c840e63bb" />
+
+
 ## 👉 YouTube
 - [Vídeo explicativo](https://youtu.be/D9yWK3W20nU?si=Wg_2aAniyqKqiqDn)
 - [Pitch](https://youtube.com/shorts/4qmeg_C60-M?si=Bn6KEHaED0M-JH8l)
