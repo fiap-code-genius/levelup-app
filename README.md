@@ -9,7 +9,12 @@ O LevelUp transforma rotinas internas em um sistema de **tarefas, pontos, nívei
 - [Vanessa Yukari](https://www.github.com/vanessayukari) | RM: 558092  
 - [Wesley Sena](https://github.com/SunaUezuri) | RM: 558043  
 
-## .APK
+## Expo Preview
+<img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/666801c1-41ec-47ed-aef8-56c7010be2a0" />
+
+##👉 YouTube
+- [Vídeo explicativo](https://youtu.be/D9yWK3W20nU?si=Wg_2aAniyqKqiqDn)
+- [Pitch](https://youtube.com/shorts/4qmeg_C60-M?si=Bn6KEHaED0M-JH8l)
 
 # ⭐ Funcionalidades Principais
 
